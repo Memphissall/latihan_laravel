@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\mahasiswaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,6 @@ Route::get('/nama', function () {
 Route::get('/kelas', function () {
     return 'kelas saya adalah ase';
 });
+
+Route::get('/mahasiswa', [mahasiswaController::class, 'index']);
+Route::post('/mahasiswa', [mahasiswaController::class, 'store']);
