@@ -11,12 +11,14 @@
             {{-- Form Tambah Mahasiswa --}}
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="font-semibold text-lg mb-4">Tambah Ruangan</h3>
-                    <form method="POST" action="{{ route('mahasiswa.store') }}" class="space-y-4">
+                    <h3 class="font-semibold text-lg mb-4">Dosen</h3>
+                    <form method="POST" action="{{ route('dosen.store') }}" class="space-y-4">
                         @csrf
-                        <input type="text" name="kapasitas" placeholder="Kapasitas"
+                        <input type="text" name="nama" placeholder="Nama"
                         class="border-gray-300 rounded-md w-full">
-                        <input type="text" name="ruangan" placeholder="Ruangan"
+                        <input type="text" name="nid" placeholder="NID"
+                        class="border-gray-300 rounded-md w-full">
+                        <input type="text" name="jenis_kelamin" placeholder="Jenis Kelamin"
                         class="border-gray-300 rounded-md w-full">
 
                         <button type="submit"
@@ -27,22 +29,24 @@
                 </div>
             </div>
 
-            {{-- List Mahasiswa --}}
+            {{-- List Dosen --}}
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-4">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="font-semibold text-lg mb-4">List Ruangan</h3>
+                    <h3 class="font-semibold text-lg mb-4">List Dosen</h3>
                     <table class="table-auto w-full border">
                         <thead class="bg-gray-200 text-gray-700">
                             <tr>
-                                <th class="px-4 py-2 border">Kapasitas</th>
-                                <th class="px-4 py-2 border">Ruangan</th>
+                                <th class="px-4 py-2 border">Nama</th>
+                                <th class="px-4 py-2 border">Nid</th>
+                                <th class="px-4 py-2 border">jenis Kelamin</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $kls)
+                            @foreach($data as $dosen)
                             <tr>
-                                <td class="border px-4 py-2">{{ $kls->kapasitas }}</td>
-                                <td class="border px-4 py-2">{{ $kls->ruangan }}</td>
+                                <td class="border px-4 py-2">{{ $dosen->nama }}</td>
+                                <td class="border px-4 py-2">{{ $dosen->nid }}</td>
+                                <td class="border px-4 py-2">{{ $dosen->jenis_kelamin }}</td>
                             </tr>
                             @endforeach
                         </tbody>
