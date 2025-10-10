@@ -14,7 +14,7 @@ class Clases extends Model
 
     public function mahasiswa()
     {
-        return $this->hasmany(Mahasiswa::class);
+        return $this->hasMany(Mahasiswa::class,'kelas_id');
     }
 }
 

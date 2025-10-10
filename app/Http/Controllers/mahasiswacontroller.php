@@ -22,13 +22,14 @@ class mahasiswacontroller extends Controller
         $request->validate([
             'nama' => 'required|string|max:255|unique:mahasiswa,nama',
             'nim' => 'required|string|max:50|unique:mahasiswa,nim',
-            'kelas_id' => 'required|exists:mahasiswa,kelas_id',
+            'kelas_id' => 'required|exists:clases,id',
         ]);
 
+       
         Mahasiswa::create([
             'nama' => $request->nama,
-            'nim' =>$request->nim,
-            'kelas_id' =>$request->kelas_id,
+            'nim' => $request->nim,
+            'kelas_id' => $request->kelas_id,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan');
