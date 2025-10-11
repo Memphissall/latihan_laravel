@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Resoonses;
+
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+
+class LoginResponse implements LoginResponseContract
+
+{
+    public function toResponse($request)
+    {
+        $user = $request->user();
+
+        if ($user->role === 'admin'){
+            return redirect()->route('admin.dasboard');
+        }
+        return redirect()->route('ekyc.step1');
+    }
+}
+?>

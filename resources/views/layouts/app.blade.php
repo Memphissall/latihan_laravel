@@ -16,6 +16,7 @@
             <div class="flex">
                 <aside class="w-64 bg-white border-r shadow-sm min-h-screen">
                     <nav class="p-4 space-y-1">
+                        @if (Auth::user() && Auth::user()->role === 'admin')
                         <a href="{{ route('dashboard') }}"
                         class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dashboard') ? 'bg-gray-200 font-semibold' : ''}}">
                         dashboard
@@ -34,6 +35,7 @@
                         class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dosen.index') ? 'bg-gray-200 font-semibold' : ''}}">
                         Dosen
 </a>
+@endif
 </nav>
 </aside>
 
