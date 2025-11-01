@@ -117,6 +117,49 @@ public function storeStep3(Request $request)
 }
 
 
+//step4
+public function showStep4()
+{
+    // Ambil data eKYC berdasarkan user yang login
+    $data = \App\Models\EkycRegistration::where('user_id', auth()->id())->first();
+
+    return view('ekyc.step4', compact('data'));
+}
+
+public function storeStep4(Request $request)
+{
+   
+    $request->validate([
+        'alamat_lengkap' => 'required|string|max:255',
+        'provinsi' => 'required|string|max:100',
+        'kota' => 'required|string|max:100',
+        'kecamatan' => 'required|string|max:100',
+        'kode_pos' => 'required|numeric|digits_between:1,6',
+        'nama_ibu' => 'required|string|max:100',
+        'referensi' => 'required|string|max:100',
+    ]);
+
+   
+    \App\Models\EkycRegistration::updateOrCreate(
+        ['user_id' => auth()->id()],
+        [
+            'alamat_lengkap' => $request->alamat_lengkap,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
+            'kode_pos' => $request->kode_pos,
+            'nama_ibu' => $request->nama_ibu,
+            'referensi' => $request->referensi,
+        ]
+    );
+
+    
+    return redirect()->route('dashboard')->with('success', 'Data Step 4 berhasil disimpan!');
+}
+
+
+
+
 }
 
 
