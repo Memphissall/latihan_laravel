@@ -57,7 +57,7 @@
             </div>
 
             <div class="flex justify-end">
-                <a href="{{ route('eky.step4')}}"><button type="submit"
+                <a href="{{ route('ekyc.step4')}}"><button type="submit"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                     Simpan & Lanjut
                 </button></a>
