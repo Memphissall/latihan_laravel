@@ -22,6 +22,13 @@ class EkycRegistration extends Model
         'asal_sd',    
         'asal_smp',    
         'asal_sma',    
+        'alamat',    
+        'provinsi',    
+        'kota/kabupaten',    
+        'kecamatan',
+        'kode_pos', 
+        'nama_ibu_kandung',
+        'refensi_sumber',   
     ];
 
     // Relasi ke tabel users
