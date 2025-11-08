@@ -1,13 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Step 4 🏠 Data Alamat & Informasi Tambahan
+            Step 4 📍 Alamat Domisili & Referensi Pendaftaran
         </h2>
     </x-slot>
 
-    <div class="max-w-xl mx-auto mt-8 bg-white p-6 rounded-lg shadow">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow mt-8">
         @if (session('success'))
-            <div class="mb-4 text-green-600">{{ session('success') }}</div>
+            <div class="bg-green-100 text-green-700 p-3 mb-4 rounded">
+                {{ session('success') }}
+            </div>
         @endif
 
         <form method="POST" action="{{ route('ekyc.step4.store') }}">
@@ -24,17 +26,24 @@
                 <label class="block text-sm font-medium text-gray-700">Provinsi</label>
                 <select name="provinsi" id="provinsi" class="mt-1 block w-full border-gray-300 rounded-md">
                     <option value="">-- Pilih Provinsi --</option>
-                    <option value="Jawa Barat" {{ old('provinsi', $data->provinsi ?? '') == 'Jawa Barat' ? 'selected' : '' }}>Jawa Barat</option>
-                    <option value="Jawa Tengah" {{ old('provinsi', $data->provinsi ?? '') == 'Jawa Tengah' ? 'selected' : '' }}>Jawa Tengah</option>
-                    <option value="Jawa Timur" {{ old('provinsi', $data->provinsi ?? '') == 'Jawa Timur' ? 'selected' : '' }}>Jawa Timur</option>
+                    @foreach ($provinsiList as $prov)
+                        <option value="{{ $prov }}" {{ old('provinsi', $data->provinsi ?? '') == $prov ? 'selected' : '' }}>
+                            {{ $prov }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
-            {{-- Kota/Kabupaten --}}
+            {{-- Kota --}}
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Kota / Kabupaten</label>
+                <label class="block text-sm font-medium text-gray-700">Kota</label>
                 <select name="kota" id="kota" class="mt-1 block w-full border-gray-300 rounded-md">
-                    <option value="">-- Pilih Kota/Kabupaten --</option>
+                    <option value="">-- Pilih Kota --</option>
+                    @foreach ($kotaList as $kota)
+                        <option value="{{ $kota }}" {{ old('kota', $data->kota ?? '') == $kota ? 'selected' : '' }}>
+                            {{ $kota }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -43,95 +52,99 @@
                 <label class="block text-sm font-medium text-gray-700">Kecamatan</label>
                 <select name="kecamatan" id="kecamatan" class="mt-1 block w-full border-gray-300 rounded-md">
                     <option value="">-- Pilih Kecamatan --</option>
+                    @foreach ($kecamatanList as $kec)
+                        <option value="{{ $kec }}" {{ old('kecamatan', $data->kecamatan ?? '') == $kec ? 'selected' : '' }}>
+                            {{ $kec }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
             {{-- Kode Pos --}}
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Kode Pos</label>
-                <input type="number" name="kode_pos" maxlength="6"
-                    oninput="if(this.value.length>6)this.value=this.value.slice(0,6)"
+                <input type="text" name="kode_pos" id="kode_pos"
                     value="{{ old('kode_pos', $data->kode_pos ?? '') }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md">
+                    class="mt-1 block w-full border-gray-300 rounded-md" readonly>
             </div>
 
             {{-- Nama Ibu Kandung --}}
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Nama Ibu Kandung</label>
-                <input type="text" name="nama_ibu" value="{{ old('nama_ibu', $data->nama_ibu ?? '') }}"
+                <input type="text" name="nama_ibu_kandung"
+                    value="{{ old('nama_ibu_kandung', $data->nama_ibu_kandung ?? '') }}"
                     class="mt-1 block w-full border-gray-300 rounded-md">
             </div>
 
-            {{-- Referensi / Sumber Informasi --}}
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700">Referensi / Sumber Informasi Pendaftaran</label>
-                <select name="referensi" class="mt-1 block w-full border-gray-300 rounded-md">
-                    <option value="">-- Pilih Sumber Informasi --</option>
-                    <option value="Sosial Media" {{ old('referensi', $data->referensi ?? '') == 'Sosial Media' ? 'selected' : '' }}>Sosial Media</option>
-                    <option value="Kerabat" {{ old('referensi', $data->referensi ?? '') == 'Kerabat' ? 'selected' : '' }}>Kerabat</option>
-                    <option value="Informasi Kampus" {{ old('referensi', $data->referensi ?? '') == 'Informasi Kampus' ? 'selected' : '' }}>Informasi Kampus</option>
+            {{-- Referensi Sumber Informasi --}}
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Sumber Informasi Pendaftaran</label>
+                <select name="referensi_sumber" class="mt-1 block w-full border-gray-300 rounded-md">
+                    <option value="">-- Pilih Sumber --</option>
+                    <option value="Sosial Media" {{ old('referensi_sumber', $data->referensi_sumber ?? '') == 'Sosial Media' ? 'selected' : '' }}>Sosial Media</option>
+                    <option value="Teman" {{ old('referensi_sumber', $data->referensi_sumber ?? '') == 'Teman' ? 'selected' : '' }}>Teman</option>
+                    <option value="Langsung dari Kampus" {{ old('referensi_sumber', $data->referensi_sumber ?? '') == 'Langsung dari Kampus' ? 'selected' : '' }}>Langsung dari Kampus</option>
                 </select>
             </div>
 
-            <div class="flex justify-end">
-                <button type="submit"
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Simpan & Selesai
+            {{-- Navigasi --}}
+            <div class="flex justify-between items-center mt-4">
+                <a href="{{ route('ekyc.step3') }}" class="text-sm text-gray-500 hover:text-gray-700">← Kembali ke Step 3</a>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    @if ($data && $data->status === 'submitted')
+                     <a href="{{ route('ekyc.step5') }}" class="">Next</a>
+                @else 
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan & Lanjut Step 5 -></button>
+                @endif
+
+                    
                 </button>
             </div>
         </form>
     </div>
 
-    {{-- JS untuk select dinamis kota & kecamatan --}}
+    {{-- Script Dinamis (Provinsi → Kota → Kecamatan → Kode Pos) --}}
     <script>
-        const kotaOptions = {
-            "Jawa Barat": ["Bandung", "Bekasi", "Bogor"],
-            "Jawa Tengah": ["Semarang", "Solo", "Magelang"],
-            "Jawa Timur": ["Surabaya", "Malang", "Kediri"]
-        };
+        const alamatData = @json($alamatList);
 
-        const kecamatanOptions = {
-            "Bandung": ["Coblong", "Lengkong", "Cibiru"],
-            "Bekasi": ["Bekasi Utara", "Bekasi Selatan"],
-            "Bogor": ["Bogor Barat", "Bogor Timur"],
-            "Semarang": ["Tembalang", "Candisari"],
-            "Solo": ["Laweyan", "Banjarsari"],
-            "Magelang": ["Magelang Selatan", "Magelang Tengah"],
-            "Surabaya": ["Tegalsari", "Sukolilo", "Rungkut"],
-            "Malang": ["Klojen", "Lowokwaru"],
-            "Kediri": ["Mojoroto", "Pesantren"]
-        };
-
-        document.getElementById('provinsi').addEventListener('change', function() {
+        // Provinsi → Kota
+        document.getElementById('provinsi').addEventListener('change', function () {
             const prov = this.value;
             const kotaSelect = document.getElementById('kota');
-            kotaSelect.innerHTML = '<option value="">-- Pilih Kota/Kabupaten --</option>';
-
-            if (kotaOptions[prov]) {
-                kotaOptions[prov].forEach(k => {
-                    const opt = document.createElement('option');
-                    opt.value = k;
-                    opt.textContent = k;
-                    kotaSelect.appendChild(opt);
-                });
-            }
-
-            document.getElementById('kecamatan').innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-        });
-
-        document.getElementById('kota').addEventListener('change', function() {
-            const kota = this.value;
             const kecSelect = document.getElementById('kecamatan');
+
+            kotaSelect.innerHTML = '<option value="">-- Pilih Kota --</option>';
             kecSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
 
-            if (kecamatanOptions[kota]) {
-                kecamatanOptions[kota].forEach(kec => {
-                    const opt = document.createElement('option');
-                    opt.value = kec;
-                    opt.textContent = kec;
-                    kecSelect.appendChild(opt);
-                });
-            }
+            const filteredKota = alamatData.filter(item => item.provinsi === prov).map(item => item.kota);
+            const uniqueKota = [...new Set(filteredKota)];
+
+            uniqueKota.forEach(kota => {
+                kotaSelect.innerHTML += `<option value="${kota}">${kota}</option>`;
+            });
+        });
+
+        // Kota → Kecamatan
+        document.getElementById('kota').addEventListener('change', function () {
+            const kota = this.value;
+            const kecSelect = document.getElementById('kecamatan');
+
+            kecSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+
+            const filteredKec = alamatData.filter(item => item.kota === kota).map(item => item.kecamatan);
+            const uniqueKec = [...new Set(filteredKec)];
+
+            uniqueKec.forEach(kec => {
+                kecSelect.innerHTML += `<option value="${kec}">${kec}</option>`;
+            });
+        });
+
+        // Kecamatan → Kode Pos
+        document.getElementById('kecamatan').addEventListener('change', function () {
+            const kec = this.value;
+            const kodeInput = document.getElementById('kode_pos');
+            const selected = alamatData.find(item => item.kecamatan === kec);
+            kodeInput.value = selected ? selected.kode_pos : '';
         });
     </script>
 </x-app-layout>

@@ -18,18 +18,19 @@ class EkycRegistration extends Model
         'file_ktp',
         'file_kk',
         'file_ijazah',
-        'file_selfie',    
-        'asal_sd',    
-        'asal_smp',    
+        'file_selfie',
+        'asal_sd',
+        'asal_smp',
         'asal_sma',
-        'alamat-lengkap',
         'provinsi',
         'kota',
-        ''
-
+        'kecamatan',
+        'kode_pos',
+        'nama_ibu_kandung',
+        'referensi_sumber', 
     ];
 
-    // Relasi ke tabel users
+    
     public function user()
     {
         return $this->belongsTo(User::class);

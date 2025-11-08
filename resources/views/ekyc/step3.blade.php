@@ -59,7 +59,13 @@
             <div class="flex justify-end">
                 <a href="{{ route('ekyc.step4')}}"><button type="submit"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Simpan & Lanjut
+                    @if ($data && $data->status === 'submitted')
+                     <a href="{{ route('ekyc.step4') }}" class="">Next</a>
+                @else 
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan & Lanjut Step 4 -></button>
+                @endif
+
+                    
                 </button></a>
             </div>
         </form>

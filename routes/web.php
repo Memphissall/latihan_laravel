@@ -54,5 +54,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/ekyc/step4', [EkycController::class, 'storeStep4'])->name('ekyc.step4.store');
 
 
+        // step4
+        Route::get('/ekyc/step4', [EkycController::class, 'showStep4'])->name('ekyc.step4');
+        Route::post('/ekyc/step4', [EkycController::class, 'storeStep4'])->name('ekyc.step4.store');
+
+        //  step5
+        Route::get('/ekyc/step5',[EkycController::class, 'step5'])->name('ekyc.step5');
+
+
+        //Route::get('/get-kota', [EkycController::class, 'getKota'])->name('get.kota');
+        // Route::get('/get-kecamatan', [EkycController::class, 'getKecamatan'])->name('get.kecamatan');
+
+
         });
 require __DIR__.'/auth.php';
