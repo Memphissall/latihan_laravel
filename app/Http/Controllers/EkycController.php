@@ -79,7 +79,7 @@ public function storeStep2(Request $request)
     $ekyc->update($validated);
 
     // Jika ingin lanjut otomatis ke step 3, aktifkan baris di bawah:
-    // return redirect()->route('ekyc.step3')->with('success', 'Step 2 tersimpan.');
+    //return redirect()->route('ekyc.step3')->with('success', 'Step 2 tersimpan.');
 
     return redirect()->route('ekyc.step3')->with('success', 'Step 2 Tersimpan.');
 }
