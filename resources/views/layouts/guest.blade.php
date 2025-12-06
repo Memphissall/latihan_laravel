@@ -7,7 +7,7 @@
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('logo_blue.png') }}">
-        <!-- Jika kamu pakai .ico -->
+       
         <!-- <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"> -->
 
         <!-- Fonts -->

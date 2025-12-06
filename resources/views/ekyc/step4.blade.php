@@ -18,7 +18,7 @@
             {{-- Alamat Domisili Lengkap --}}
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Alamat Domisili Lengkap</label>
-                <textarea name="alamat_lengkap" rows="3" class="mt-1 block w-full border-gray-300 rounded-md">{{ old('alamat_lengkap', $data->alamat_lengkap ?? '') }}</textarea>
+                <textarea name="alamat_lengkap" rows="3" class="mt-1 block w-full border-gray-300 rounded-md">{{ old('alamatDomisili', $data->alamatDomisili ?? '') }}</textarea>
             </div>
 
             {{-- Provinsi --}}

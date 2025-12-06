@@ -206,8 +206,8 @@ public function step5()
     }
 
     //pastikan hanya user dengan status selesai yang bisa melihat halaman ini
-    if ($data->status !== 'submitted'){
-        return redirect()->route('ekyc.step4')->with('error', 'Lengkapi data terlebih dahulu sebelum menyelesaikan eKYC');
+    if ($data->status === 'draft'){
+        return redirect()->route('ekyc.step1')->with('error', 'Lengkapi data terlebih dahulu sebelum menyelesaikan eKYC');
     }
     return view('ekyc.step5', compact('data'));
 }

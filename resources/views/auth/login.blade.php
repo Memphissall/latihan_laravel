@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="min-h-screen w-full bg-cover bg-center relative flex justify-center items-center"
-         style="background-image: url('{{ asset('images/ca.jpeg') }}');">
+         style="background-image: url('{{ asset('images/lp3i.jpeg') }}');">
 
         <!-- Overlay putih transparan -->
         <div class="absolute inset-0 bg-white bg-opacity-40 backdrop-blur-sm"></div>
